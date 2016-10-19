@@ -15,6 +15,11 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
     private Transform carriedObject = null;
     private int pickUpLayer;
+
+
+	//test Anto
+	public GameObject prefab;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
@@ -38,6 +43,9 @@ public class PlayerController : MonoBehaviour {
             else
                 PickUp();
         }
+		if (Input.GetKeyDown("k")) {
+				GameObject go = Instantiate(Resources.Load("default"), new Vector3(0, 50, 0), Quaternion.identity) as GameObject;
+		}
 	}
 
     private void Drop()
