@@ -1,33 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     [SerializeField]
-    float rotationSpeed = 100.0f;
+    float rotationSpeed;
 
     [SerializeField]
-    float moveSpeed = 10.0f;
+    float moveSpeed;
 
     [SerializeField]
-    float pickUpDist = 1f;
+    float pickUpDist;
 
-    private Rigidbody rb;
+    [SerializeField]
+    float karma;
+
     private Transform carriedObject = null;
     private int pickUpLayer;
 
 
-	//test Anto
-	public GameObject prefab;
-
-	// Use this for initialization
-	void Start () {
-        rb = GetComponent<Rigidbody>();
+    // Use this for initialization
+    void Start()
+    {
+        rotationSpeed = 300.0f;
+        moveSpeed = 10.0f;
+        karma = 2.00f;
         pickUpLayer = 1 << LayerMask.NameToLayer("PickUp");
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
         float move = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
@@ -37,16 +41,11 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown("e"))
         {
             if (carriedObject != null)
-            {
                 Drop();
-            }
             else
                 PickUp();
         }
-		if (Input.GetKeyDown("k")) {
-				GameObject go = Instantiate(Resources.Load("default"), new Vector3(0, 50, 0), Quaternion.identity) as GameObject;
-		}
-	}
+    }
 
     private void Drop()
     {
@@ -75,5 +74,15 @@ public class PlayerController : MonoBehaviour {
             carriedObject.parent = transform;
             carriedObject.localPosition = new Vector3(0, 1f, 1f);
         }
+    }
+
+    public float getKarma()
+    {
+        return karma;
+    }
+
+    public void setKarma(float value)
+    {
+        karma = value;
     }
 }
