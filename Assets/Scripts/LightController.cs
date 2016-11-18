@@ -27,5 +27,13 @@ public class LightController : MonoBehaviour
         {
             gameObject.GetComponent<Light>().intensity -= 0.01f;
         }
+        if (playerKarma == 1)
+            RenderSettings.fogDensity = 0.04f;
+        if (playerKarma == 2)
+            RenderSettings.fogDensity = 0.03f;
+        if (playerKarma == 3)
+            RenderSettings.fogDensity = 0.02f;
+        if (playerKarma == 4)
+            RenderSettings.fogDensity = 0.01f;
     }
 }

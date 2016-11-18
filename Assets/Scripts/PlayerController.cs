@@ -54,6 +54,10 @@ public class PlayerController : MonoBehaviour
         {
             footStepController.play(onTheGround);
         }
+        if (Input.GetKeyDown("space"))
+        {
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 250.0f);
+        }
     }
 
     private void Drop()
