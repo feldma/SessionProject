@@ -25,6 +25,7 @@ public class SolveEnigma : MonoBehaviour
         if (other.tag == "EnigmaItem")
         {
             player.setKarma(other.GetComponent<SphereController>().getKarmaWeight());
+
             //opens the door
             door.enter = true;
         }

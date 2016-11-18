@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float karma;
 
+    private string onTheGround = "Ground";
     private Transform carriedObject = null;
     private int pickUpLayer;
+    private FootStepController footStepController;
 
 
     // Use this for initialization
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 10.0f;
         karma = 2.00f;
         pickUpLayer = 1 << LayerMask.NameToLayer("PickUp");
+
+        footStepController = GetComponent<FootStepController>();
     }
 
     // Update is called once per frame
@@ -44,6 +48,11 @@ public class PlayerController : MonoBehaviour
                 Drop();
             else
                 PickUp();
+        }
+
+        if (Input.GetButton("Vertical"))
+        {
+            footStepController.play(onTheGround);
         }
     }
 
@@ -84,5 +93,10 @@ public class PlayerController : MonoBehaviour
     public void setKarma(float value)
     {
         karma = value;
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        onTheGround = collision.gameObject.tag;
     }
 }

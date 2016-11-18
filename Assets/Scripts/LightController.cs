@@ -17,14 +17,15 @@ public class LightController : MonoBehaviour
     void Update()
     {
         float playerKarma = player.getKarma();
+        float lightIntensity = gameObject.GetComponent<Light>().intensity;
 
-        if (gameObject.GetComponent<Light>().intensity < playerKarma)
+        if (lightIntensity < playerKarma)
         {
-            gameObject.GetComponent<Light>().intensity += Time.deltaTime;
+            gameObject.GetComponent<Light>().intensity += 0.01f;
         }
-        else if (gameObject.GetComponent<Light>().intensity > playerKarma && gameObject.GetComponent<Light>().intensity > 0)
+        else if (lightIntensity > playerKarma && lightIntensity > 0)
         {
-            gameObject.GetComponent<Light>().intensity -= Time.deltaTime;
+            gameObject.GetComponent<Light>().intensity -= 0.01f;
         }
     }
 }

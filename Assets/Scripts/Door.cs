@@ -13,12 +13,14 @@ public class Door : MonoBehaviour {
 
     private Vector3 defaultRot;
     private Vector3 openRot;
+    private AudioSource source;
 
     void Start()
     {
         defaultRot = transform.eulerAngles;
         openRot = new Vector3(defaultRot.x, defaultRot.y + DoorOpenAngle, defaultRot.z);
         enter = false;
+        source = GetComponent<AudioSource>();
     }
 
     //Main function
@@ -38,6 +40,7 @@ public class Door : MonoBehaviour {
         if (Input.GetKeyDown("f") && enter)
         {
             open = !open;
+            source.Play();
         }
     }
 
