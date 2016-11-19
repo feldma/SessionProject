@@ -21,24 +21,22 @@ public class FenceController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-	
-	}
-
-    void OnTriggerEnter(Collider c)
-    {
-        if (Input.GetKeyDown("f"))
+        if (open)
         {
-            if (open)
-            {
-                //Open door
-                transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, openRot, Time.deltaTime * smooth);
-            }
-            else
-            {
-                //Close door
-                transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
-            }
-            open = !open;
+            //Open door
+            transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, openRot, Time.deltaTime * smooth);
         }
+        else
+        {
+            //Close door
+            transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
+        }
+
+        if (Input.GetKeyDown("f"))
+            open = !open;
     }
+
+    /*void OnTriggerEnter(Collider c)
+    {
+    }*/
 }
