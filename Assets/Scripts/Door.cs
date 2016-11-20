@@ -9,6 +9,7 @@ public class Door : MonoBehaviour {
     [SerializeField]
     float DoorOpenAngle = 90.0f;
     private bool open;
+    private bool hasOpened = false;
     public bool enter { get; set; }
 
     private Vector3 defaultRot;
@@ -41,15 +42,18 @@ public class Door : MonoBehaviour {
         {
             open = !open;
             source.Play();
+            hasOpened = true;
         }
     }
 
     void OnGUI()
     {
-        if (enter)
+        if (enter && !hasOpened)
         {
             GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 150, 30), "Press 'F' to open the door");
         }
+        else
+            GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 150, 30), "");
     }
 
     //Activate the Main function when player is near the door

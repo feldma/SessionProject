@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\FenceController.cs" />
     <Compile Include="Assets\Scripts\FootStepController.cs" />
+    <Compile Include="Assets\Scripts\GardenOutsideController.cs" />
     <Compile Include="Assets\Scripts\LightController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SolveEnigma.cs" />

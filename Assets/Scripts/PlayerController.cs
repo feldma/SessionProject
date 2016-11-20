@@ -21,10 +21,12 @@ public class PlayerController : MonoBehaviour
     private int pickUpLayer;
     private FootStepController footStepController;
 
+    private bool hasTaken = false;
 
     // Use this for initialization
     void Start()
     {
+        Cursor.visible = false;
         rotationSpeed = 300.0f;
         moveSpeed = 10.0f;
         karma = 2.00f;
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
                 Drop();
             else
                 PickUp();
+            hasTaken = true;
         }
 
         if (Input.GetButton("Vertical"))
@@ -58,6 +61,16 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * 250.0f);
         }
+        if (Input.GetKeyDown("escape"))
+            Application.Quit();
+    }
+
+    private void OnGUI()
+    {
+        if (!hasTaken)
+            GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 160, 30), "Press 'E' to take an object");
+        else
+            GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 150, 30), "");
     }
 
     private void Drop()
@@ -102,5 +115,10 @@ public class PlayerController : MonoBehaviour
     void OnCollisionStay(Collision collision)
     {
         onTheGround = collision.gameObject.tag;
+    }
+
+    public void modifyKarma(float value)
+    {
+        karma += value;
     }
 }
