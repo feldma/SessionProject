@@ -67,8 +67,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnGUI()
     {
+        GUIStyle style = new GUIStyle();
+
+        style.fontSize = 30;
         if (!hasTaken)
-            GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 160, 30), "Press 'E' to take an object");
+            GUI.Label(new Rect(Screen.width / 2 - 300, Screen.height - 100, 160, 30), "Press 'E' to take an object", style);
         else
             GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 150, 30), "");
     }
