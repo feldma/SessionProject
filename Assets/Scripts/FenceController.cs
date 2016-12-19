@@ -9,6 +9,9 @@ public class FenceController : MonoBehaviour {
     [SerializeField]
     float smooth = 2.0f;
 
+    [SerializeField]
+    PlayerController player;
+
     private bool open = false;
     private Vector3 defaultRot;
     private Vector3 openRot;
@@ -34,10 +37,11 @@ public class FenceController : MonoBehaviour {
             transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
         }
 
-        if (Input.GetKeyDown("f") && isInside)
+        if (Input.GetKeyDown("f") && isInside && player.hasKey)
         {
             open = !open;
             hasOpened = true;
+            player.hasKey = false;
         }
     }
 
@@ -53,8 +57,8 @@ public class FenceController : MonoBehaviour {
 
     private void OnGUI()
     {
-        if (isInside && !hasOpened)
-        GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 230, 30), "Maybe I could open the fence...");
+        if (isInside && !hasOpened && !player.hasKey)
+        GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 230, 40), "Maybe I could get the key of the fence or try something else");
     }
 
     public bool getHasOpened()

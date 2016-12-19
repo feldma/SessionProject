@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private FootStepController footStepController;
 
     private bool hasTaken = false;
+    public bool canTakeKey { get; set; }
+    public bool hasKey = false;
 
     // Use this for initialization
     void Start()
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
         pickUpLayer = 1 << LayerMask.NameToLayer("PickUp");
 
         footStepController = GetComponent<FootStepController>();
+        canTakeKey = false;
     }
 
     // Update is called once per frame
@@ -70,8 +73,10 @@ public class PlayerController : MonoBehaviour
         GUIStyle style = new GUIStyle();
 
         style.fontSize = 30;
-        if (!hasTaken)
+        if (!hasTaken || canTakeKey)
             GUI.Label(new Rect(Screen.width / 2 - 300, Screen.height - 100, 160, 30), "Press 'E' to take an object", style);
+        else if (hasKey)
+            GUI.Label(new Rect(Screen.width / 2 - 300, Screen.height - 100, 160, 30), "You have now the key !", style);
         else
             GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 150, 30), "");
     }
@@ -99,9 +104,17 @@ public class PlayerController : MonoBehaviour
         }
         if (carriedObject != null)
         {
-            Destroy(carriedObject.GetComponent<Rigidbody>());
-            carriedObject.parent = transform;
-            carriedObject.localPosition = new Vector3(0, 1f, 1f);
+            if (carriedObject.gameObject.tag == "Key")
+            {
+                Destroy(carriedObject.gameObject);
+                hasKey = true;
+            }
+            else
+            {
+                Destroy(carriedObject.GetComponent<Rigidbody>());
+                carriedObject.parent = transform;
+                carriedObject.localPosition = new Vector3(0, 1f, 1f);
+            }
         }
     }
 

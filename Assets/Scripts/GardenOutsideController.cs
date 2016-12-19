@@ -38,6 +38,6 @@ public class GardenOutsideController : MonoBehaviour {
     private void OnGUI()
     {
         if (isInside)
-            GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 230, 60), "Well done you found how to get out this garden, but are you ready for the next challenges ?");
+            GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 230, 60), "Yay i'm out ! Maybe I could go see my old friend Jim");
     }
 }
